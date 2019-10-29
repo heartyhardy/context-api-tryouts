@@ -1,24 +1,20 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useMemo } from 'react';
 import './App.css';
 
+import PersonList from './components/person-list';
+import PersonsContext from './context/persons';
+
 function App() {
+
+  const [persons, setPersons] = useState(["Ben", "Martha", "Robin", "Meven"]);
+
+  const personsMemo = useMemo(() => ({ persons, setPersons }), [persons, setPersons]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <PersonsContext.Provider value={personsMemo}>
+        <PersonList />
+      </PersonsContext.Provider>
     </div>
   );
 }

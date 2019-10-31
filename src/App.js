@@ -1,22 +1,20 @@
 import React, { useState, useMemo } from 'react';
 import './App.css';
 
-import PersonList from './components/person-list';
-import PersonsContext from './context/persons';
+import Comments from './components/comments';
+import Comment from './components/comment';
+import CommentContext from './context/comment-context';
 
 function App() {
 
-  const [persons, setPersons] = useState(["Ben", "Martha", "Robin", "Meven"]);
-
-  const personsMemo = useMemo(() => ({ persons, setPersons }), [persons, setPersons]);
-
-  return (
-    <div className="App">
-      <PersonsContext.Provider value={personsMemo}>
-        <PersonList />
-      </PersonsContext.Provider>
-    </div>
-  );
+  const [message, setMessage] = useState("Hello world!");
+  const messageMemo = useMemo(() => ({message, setMessage}), [message, setMessage]);
+  return(
+    <CommentContext.Provider value={messageMemo}>
+      <Comments />
+      <Comment />
+    </CommentContext.Provider>
+  )
 }
 
 export default App;
